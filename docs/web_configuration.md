@@ -1,0 +1,7 @@
+# Local Wi-Fi configuration
+
+The C3 starts a WPA2 AP named `Whoopy-Setup`, password `whoopy-setup-2026`, at `192.168.4.1`; open `http://192.168.4.1/`. No internet or cloud dependency is used. AP credentials are build-time Kconfig settings (`CONFIG_WHOOPY_AP_SSID`, `CONFIG_WHOOPY_AP_PASSWORD`); set your own unique password in menuconfig or sdkconfig. Passwords are never logged.
+
+Dashboard polling is local HTTP JSON at `/api/status` (1 Hz). It reports state, IMU/radio health, calibration result, packet age, attitude, gyro, controls, motor PWM and loop timing. Battery is explicitly unavailable because the BOM has no ADC divider. `/api/config` GET returns active roll/pitch/yaw rate PID gains, stabilized angle/rate limits, complementary-filter alpha, failsafe timeout, maximum motor PWM fraction and mode. POST accepts a bounded JSON config and applies it temporarily; `/api/save` persists the validated config to versioned NVS; `/api/defaults` restores defaults temporarily; `/api/calibrate` requests disarmed gyro calibration with a stationary check. Changes are rejected unless state is DISARMED; the web server cannot arm or alter motor outputs. Flash save is explicit. Expo, alternate filter types, motor idle PWM, and battery ADC scaling are not exposed in this prototype.
+
+The AP is separate from the nRF24 link and is not a flight-control fallback. The default password is published in this repository and is intended only for bench setup; configure a private password before routine operation.

@@ -1,0 +1,8 @@
+menu "Whoopy drone settings"
+config WHOOPY_AP_SSID
+    string "Configuration AP SSID"
+    default "Whoopy-Setup"
+config WHOOPY_AP_PASSWORD
+    string "Configuration AP password (8+ chars)"
+    default "whoopy-setup-2026"
+endmenu
