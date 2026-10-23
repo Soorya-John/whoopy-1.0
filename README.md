@@ -40,11 +40,11 @@ idf.py build
 idf.py -p COM6 flash monitor
 ```
 
-The supplied projects use ESP-IDF's component manager for the S3 HID host dependency. Confirm dependency download and compile against the installed 5.2 patch release; this environment does not have ESP-IDF installed, so firmware builds could not be run here. See [build and flash](docs/build_and_flash.md).
+The supplied projects use ESP-IDF's component manager for the S3 HID host dependency. The C3 firmware was built successfully with ESP-IDF 5.2.8; the S3 transmitter build was not run as part of the WHOOPY console work. See [build and flash](docs/build_and_flash.md).
 
 ## Drone hotspot and tuning
 
-With default build settings, the C3 starts AP `Whoopy-Setup` with password `whoopy-setup-2026` and address `http://192.168.4.1`. Change the build-time defaults in `firmware/drone_esp32c3/main/Kconfig.projbuild`; never use this known example password as a security boundary in a public environment. The AP does not provide internet access. Open the dashboard, edit supported settings, choose **Apply temporarily**, then **Save to flash** to persist; PID changes become active at runtime. Configuration mutations require disarmed state. Calibration also requires disarmed/stationary preconditions. No web control can arm the craft.
+With default build settings, the C3 starts AP `whoopy` with password `whoopy-setup-2026` and address `http://192.168.4.1`. Change the build-time defaults in `firmware/drone_esp32c3/main/Kconfig.projbuild`; never use this known example password as a security boundary in a public environment. The AP does not provide internet access. The embedded WHOOPY flight console includes Overview, PID Tuning, Flight Configuration, Sensors & Calibration, Motors, Radio Link, and System & Diagnostics sections. PID edits stay in the browser until applied; **Apply** updates RAM and **Save to flash** persists to NVS. Discard and confirmed factory reset are also available. Configuration changes and gyro calibration require disarmed state; the web API cannot arm the aircraft or write motor outputs. Telemetry limitations are documented in [web configuration](docs/web_configuration.md).
 
 ## Tests
 

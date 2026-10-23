@@ -4,6 +4,8 @@
 #include "driver/gpio.h"
 #include "esp_timer.h"
 #include "esp_rom_sys.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 static spi_device_handle_t spi;static uint32_t ok_count,fail_count;
 static uint8_t reg(uint8_t r){uint8_t tx[2]={r,0xff},rx[2]={0};spi_transaction_t t={.length=16,.tx_buffer=tx,.rx_buffer=rx};spi_device_transmit(spi,&t);return rx[1];}
 static void wr(uint8_t r,uint8_t v){uint8_t tx[2]={(uint8_t)(0x20|r),v};spi_transaction_t t={.length=16,.tx_buffer=tx};spi_device_transmit(spi,&t);}
