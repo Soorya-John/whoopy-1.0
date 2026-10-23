@@ -7,6 +7,10 @@
 #define PIN_RF_MISO 2
 #define PIN_RF_CSN 10
 #define PIN_RF_CE 3
+/* CRSF receiver: connect receiver TX to RX; TX supports receiver telemetry. */
+#define PIN_CRSF_RX 20
+#define PIN_CRSF_TX 21
+#define CRSF_UART_BAUD 420000
 #define PIN_MOTOR_1 0
 #define PIN_MOTOR_2 1
 #define PIN_MOTOR_3 8

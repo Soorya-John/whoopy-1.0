@@ -7,5 +7,7 @@ void config_defaults(drone_config_t *c);
 bool config_valid(const drone_config_t *c);
 esp_err_t config_load(drone_config_t *c);
 esp_err_t config_save(const drone_config_t *c);
+esp_err_t config_load_receiver_mode(uint8_t *mode);
+esp_err_t config_save_receiver_mode(uint8_t mode);
 void config_snapshot(const drone_config_t *source,drone_config_t *destination);
 void config_replace(drone_config_t *destination,const drone_config_t *source);

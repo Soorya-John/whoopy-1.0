@@ -8,6 +8,9 @@ No dev-board model or pin map is present in the BOM. These are proposed GPIOs on
 |---|---:|---|
 | MPU6050 SDA / SCL | 5 / 6 | I²C, 400 kHz; verify board exposure and module pullups/address (0x68 assumed, 0x69 configurable). |
 | nRF24 SCK / MOSI / MISO / CSN / CE | 4 / 7 / 2 / 10 / 3 | SPI; GPIO2/3/4/5/6/7/10 availability varies by C3 module/board. |
+| ELRS CRSF UART RX / TX | 20 / 21 | 420 kbaud, 8N1. Connect receiver TX to controller RX; connect controller TX to receiver RX only if telemetry is needed. Share ground and use the receiver's supported supply voltage. |
+
+The drone build routes console output through the ESP32-C3 USB Serial/JTAG controller so GPIO20/21 can serve CRSF UART1. Use the board's USB Serial/JTAG connector for programming and logs. Confirm these GPIOs are exposed and not occupied on the specific C3 board before wiring.
 | motor 1..4 PWM | 0 / 1 / 8 / 9 | LEDC low-side gate signals; check strapping/flash/board conflicts before use. |
 
 These assignments are a software starting point, not a claim that every C3 board exposes them safely. `CONFIG_WHOOPY_*_GPIO` values can be changed in `board_config.h` before build. Keep MOSFET gates pulled down in hardware so reset/boot means motor off.
